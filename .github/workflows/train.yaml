@@ -17,7 +17,7 @@ jobs:
       - uses: iterative/setup-cml@v1
       - name: Train model
         run: |
-          pip install requiements.txt
+          pip install requirements.txt
           dvc repro
           git fetch --prune
           dvc metrics diff --show-md master > report.md
