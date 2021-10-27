@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-      - uses: iterative/setup-cml@v1
+      #- uses: iterative/setup-cml@v1
       - name: Train model
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -34,6 +34,7 @@ jobs:
           pip install pandas
           pip install seaborn
           pip install matplotlib
+          pip install dvc
           dvc repro
           git fetch --prune
           dvc metrics diff --show-md master > report.md
@@ -42,6 +43,6 @@ jobs:
 
           echo "## Validating results by region"
 
-          cml-publish by_region.png --md >> report.md 
-          cml-send-comment report.md
+          #cml-publish by_region.png --md >> report.md 
+          #cml-send-comment report.md
           
