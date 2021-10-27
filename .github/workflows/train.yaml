@@ -44,3 +44,4 @@ jobs:
 
           cml-publish by_region.png --md >> report.md 
           cml-send-comment report.md
+          
