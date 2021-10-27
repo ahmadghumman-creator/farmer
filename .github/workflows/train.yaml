@@ -2,7 +2,8 @@ name: farmer
 on: [push]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: self-hosted
     # optionally use a convenient Ubuntu LTS + DVC + CML image
     # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
