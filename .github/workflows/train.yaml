@@ -12,4 +12,3 @@ jobs:
         inlineScript: |
           az login --identity
           az group list
-          
