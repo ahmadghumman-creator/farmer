@@ -2,6 +2,7 @@ name: farmer
 on: [push]
 jobs:
   build:
+    #runs on Azure VM
     runs-on: self-hosted
     steps:            
     - name: "Login to Azure"
