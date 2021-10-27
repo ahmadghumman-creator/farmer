@@ -18,6 +18,7 @@ jobs:
       - name: Train model
         run: |
           pip install wget
+          
           pip install sklearn
           pip install pandas
           pip install seaborn
