@@ -1,8 +1,5 @@
 name: farmer
-on:
-  push:
-    branches:
-    - experiment4
+on: [push]
 jobs:
   build:
     #runs on Azure VM
