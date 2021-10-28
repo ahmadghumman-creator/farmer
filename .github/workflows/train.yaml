@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
-      #- uses: iterative/setup-cml@v1
+      - uses: iterative/setup-cml@v1
       - name: Train model
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,17 +35,19 @@ jobs:
           pip install seaborn
           pip install matplotlib
           pip install dvc
-          python get_data.py
-          python process_data.py
-          python train.py
-          #dvc repro
-          #git fetch --prune
-          #dvc metrics diff --show-md master > report.md
+          
+          #python get_data.py
+          #python process_data.py
+          #python train.py
+          
+          dvc repro
+          git fetch --prune
+          dvc metrics diff --show-md master > report.md
 
           # Add figure to the report
 
           echo "## Validating results by region"
 
-          #cml-publish by_region.png --md >> report.md 
-          #cml-send-comment report.md
+          cml-publish by_region.png --md >> report.md 
+          cml-send-comment report.md
           
