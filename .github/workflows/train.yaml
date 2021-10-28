@@ -28,6 +28,9 @@ jobs:
           dvc repro
           git fetch --prune
           dvc metrics diff --show-md main > report.md
+          
+          git add dvc.lock
+          dvc push
 
           # Add figure to the report
 
