@@ -25,16 +25,23 @@ jobs:
           pip install matplotlib
           pip install dvc
           
-          dvc repro
-          git fetch --prune
-          dvc metrics diff --show-md main > report.md
+          python get_data.py
+          python process_data.py
+          python train.py
           
-          git add dvc.lock
-          dvc push
+          #dvc repro
+          
+          #git fetch --prune
+          #dvc metrics diff --show-md main > report.md
+          
+          #git add dvc.lock
+          #dvc push
 
           # Add figure to the report
+          
+          echo "## Metrics"
+          cml-publish metrics.json >> report.md
 
           echo "## Validating results by region"
-
           cml-publish by_region.png --md >> report.md 
           cml-send-comment report.md
