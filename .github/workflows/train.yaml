@@ -25,11 +25,11 @@ jobs:
           pip install matplotlib
           pip install dvc
           
-          python get_data.py
-          python process_data.py
-          python train.py
+          #python get_data.py
+          #python process_data.py
+          #python train.py
           
-          #dvc repro
+          dvc repro
           
           #git fetch --prune
           #dvc metrics diff --show-md main > report.md
