@@ -9,7 +9,8 @@ jobs:
     # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     
     steps:
-      - name: "Login to Azure"
+      - name: "Process"
+      #- name: "Login to Azure"
       #  uses: azure/CLI@v1
       #  with:
       #    azcliversion: 2.24.2
@@ -52,4 +53,5 @@ jobs:
 
           cml-publish by_region.png --md >> report.md 
           cml-send-comment report.md
+          
           
