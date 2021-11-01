@@ -1,32 +1,15 @@
 name: farmer
-on:
-  push:
-    branches:
-    - experiment4
+on: [push]
 jobs:
   build:
-    #runs on Azure VM
     runs-on: self-hosted
-
     # optionally use a convenient Ubuntu LTS + DVC + CML image
-    container: docker://ghcr.io/iterative/cml:0-dvc2-base1
-    
+    container: docker://ghcr.io/iterative/cml:0-dvc2-base1    
     steps:
-      - name: "Process"
-      #- name: "Login to Azure"
-      #  uses: azure/CLI@v1
-      #  with:
-      #    azcliversion: 2.24.2
-      #    inlineScript: |
-      #      az login --identity
-      #      az group list
       - uses: actions/checkout@v2
-      # may need to setup NodeJS & Python3 on e.g. self-hosted
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
-      #- run: npm install
-      - run: node --version
+          node-version: '12'
       - uses: actions/setup-python@v2
         with:
           python-version: '3.7'
@@ -42,19 +25,26 @@ jobs:
           pip install matplotlib
           pip install dvc
           
+          
           #python get_data.py
           #python process_data.py
           #python train.py
           
           dvc repro
+          
           git fetch --prune
-          dvc metrics diff --show-md master > report.md
+          dvc metrics diff --show-md main > report.md
+          
+          #git add dvc.lock
+          #dvc push
 
           # Add figure to the report
+          
+          echo "## Metrics"
+          cat metrics.json
+          
+          cml-publish metrics.json >> report.md
 
           echo "## Validating results by region"
-
           cml-publish by_region.png --md >> report.md 
           cml-send-comment report.md
-          
-          
